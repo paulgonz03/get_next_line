@@ -18,6 +18,7 @@ char *extract_line(char *aux_read)
         i++;
     }
     aux[i] = '\0';
+    free (aux_read);
     return(aux);
 }
 char *remove_first_line(char *statica)
@@ -46,6 +47,7 @@ char *remove_first_line(char *statica)
     while (statica[k] != '\0')
         new_static[j++] = statica[k++];
     new_static[j] = '\0';
+    free(statica);
     return(new_static);
 }
 
@@ -76,13 +78,15 @@ char *get_next_line(int fd)
     char *line;
 
     line = NULL;
-    if (!fd)
-        return(NULL);
+    if (fd < 0 || BUFFER_SIZE <= 0)
+	{	
+		free(statica);
+		statica = NULL;
+		return (NULL);
+	}
     statica = get_read(fd, statica);
-    // printf("%s\n", statica);
     line = extract_line(statica);
     statica = remove_first_line(statica);
-    // printf("%s\n", statica);
     if(line && *line == '\0')
     {
             free(line);
