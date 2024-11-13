@@ -83,7 +83,7 @@ char *get_next_line(int fd)
     line = extract_line(statica);
     statica = remove_first_line(statica);
     // printf("%s\n", statica);
-    if(line && line == '\0')
+    if(line && *line == '\0')
     {
             free(line);
             free(statica);
