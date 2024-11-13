@@ -34,16 +34,16 @@ char *mystrjoin(char *statica, char *aux_read)
     return(new_static);
 }
 
-int mystrchr(const char *src, int c)
-{
-    int i;
+// int mystrchr(const char *src, int c)
+// {
+//     int i;
 
-    i = 0;
-	while (src[i])
-	{
-		if (src[i] == c)
-			return(1);
-		i++;
-	}
-	return(0);
-}
+//     i = 0;
+// 	while (src[i])
+// 	{
+// 		if (src[i] == c)
+// 			return(1);
+// 		i++;
+// 	}
+// 	return(0);
+// }

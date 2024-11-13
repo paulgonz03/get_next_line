@@ -62,7 +62,7 @@ char *get_read(int fd, char *statica)
             return (0);
         statica[0] = '\0';
     }
-    while(val_read != 0 && !mystrchr(statica, '\n'))
+    while(val_read != 0) //&& !mystrchr(statica, '\n'))
     {
         val_read = read(fd, aux_read, BUFFER_SIZE);
         aux_read[val_read] = '\0';
@@ -76,26 +76,32 @@ char *get_next_line(int fd)
     char *line;
 
     line = NULL;
-    statica = NULL;
     statica = get_read(fd, statica);
-    if(!statica)
-    {
-        free(statica);
-        return (0);
-    }
+    // printf("%s\n", statica);
     line = extract_line(statica);
     statica = remove_first_line(statica);
+    // printf("%s\n", statica);
     return (line);
 }
 
-// int main()
-// {  
-//     int fd;
+int	main(void)
+{
+	int		fd;
+	char	*str;
+	int		i;
 
-//     fd = open ("hola", O_RDONLY);
-//     printf ("..%s\n", get_next_line(fd));
-//     printf ("..%s\n", get_next_line(fd));
-//     printf ("..%s\n", get_next_line(fd));
-//     close(fd);
-// }
+	i = 0;
+	fd = open("hola", O_RDONLY);
+	while ((i <= 6))
+	{
+		str = get_next_line(fd);
+		printf("line %i => [%s]\n", i + 1, str);
+		if (!str)
+			break;
+		free(str);
+		i++;
+	}
+	//printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
+	return (0);
+}
 
