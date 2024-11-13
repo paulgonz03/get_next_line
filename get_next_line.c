@@ -76,32 +76,41 @@ char *get_next_line(int fd)
     char *line;
 
     line = NULL;
+    if (!fd)
+        return(NULL);
     statica = get_read(fd, statica);
     // printf("%s\n", statica);
     line = extract_line(statica);
     statica = remove_first_line(statica);
     // printf("%s\n", statica);
+    if(line && line == '\0')
+    {
+            free(line);
+            free(statica);
+            line= NULL;
+            statica = NULL;
+    }
     return (line);
 }
 
-int	main(void)
-{
-	int		fd;
-	char	*str;
-	int		i;
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*str;
+// 	int		i;
 
-	i = 0;
-	fd = open("hola", O_RDONLY);
-	while ((i <= 6))
-	{
-		str = get_next_line(fd);
-		printf("line %i => [%s]\n", i + 1, str);
-		if (!str)
-			break;
-		free(str);
-		i++;
-	}
-	//printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
-	return (0);
-}
+// 	i = 0;
+// 	fd = open("hola", O_RDONLY);
+// 	while ((i <= 6))
+// 	{
+// 		str = get_next_line(fd);
+// 		printf("line %i => [%s]\n", i + 1, str);
+// 		if (!str)
+// 			break;
+// 		free(str);
+// 		i++;
+// 	}
+// 	//printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
+// 	return (0);
+// }
 
