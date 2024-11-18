@@ -18,7 +18,6 @@ char *extract_line(char *aux_read)
         i++;
     }
     aux[i] = '\0';
-    free (aux_read);
     return(aux);
 }
 char *remove_first_line(char *statica)
