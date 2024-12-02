@@ -6,7 +6,7 @@
 /*   By: paulgonz <paulgonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:19:17 by paulgonz          #+#    #+#             */
-/*   Updated: 2024/11/23 19:55:52 by paulgonz         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:51:45 by paulgonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,33 +66,23 @@ char	*remove_first_line(char *statica)
 
 char	*get_read(int fd, char *statica)
 {
-	int		val_read;
 	char	*aux_read;
 
-	val_read = 1;
 	aux_read = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!aux_read)
 	{
+		if (statica)
+			return (free(statica), NULL);
 		return (NULL);
 	}
-	if (statica == NULL)
+	else if (statica == NULL)
 	{
 		statica = malloc(BUFFER_SIZE * sizeof(char));
 		if (!statica)
-			return (0);
+			return (free(aux_read), NULL);
 		statica[0] = '\0';
 	}
-	while (val_read != 0 && !mystrchr(statica, '\n'))
-	{
-		val_read = read(fd, aux_read, BUFFER_SIZE);
-		if (val_read < 0)
-			return (free(statica), free(aux_read), statica = NULL);
-		aux_read[val_read] = '\0';
-		statica = mystrjoin(statica, aux_read);
-		if (!statica)
-			return (NULL);
-	}
-	free(aux_read);
+	statica = aux_get_read(fd, statica, aux_read);
 	return (statica);
 }
 

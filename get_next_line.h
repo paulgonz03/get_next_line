@@ -6,7 +6,7 @@
 /*   By: paulgonz <paulgonz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 19:19:35 by paulgonz          #+#    #+#             */
-/*   Updated: 2024/11/23 19:26:13 by paulgonz         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:52:14 by paulgonz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int		mystrlen(char *str);
 char	*mystrjoin(char *statica, char *aux_read);
 char	*get_read(int fd, char *statica);
 int		mystrchr(const char *src, int c);
+char	*aux_get_read(int fd, char *statica, char *aux_read);
 
 #endif
